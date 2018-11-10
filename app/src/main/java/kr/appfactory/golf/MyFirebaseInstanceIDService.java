@@ -1,4 +1,4 @@
-package kr.appfactory.billiard;
+package kr.appfactory.golf;
 
 import android.content.Context;
 import android.util.Log;

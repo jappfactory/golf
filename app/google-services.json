@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "1025462847266",
-    "firebase_url": "https://appfacory-billiard.firebaseio.com",
-    "project_id": "appfacory-billiard",
-    "storage_bucket": "appfacory-billiard.appspot.com"
+    "project_number": "287201327941",
+    "firebase_url": "https://appfacory-golf.firebaseio.com",
+    "project_id": "appfacory-golf",
+    "storage_bucket": "appfacory-golf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1025462847266:android:09f5a2105efdf765",
+        "mobilesdk_app_id": "1:287201327941:android:4e1a7cd0480a32d3",
         "android_client_info": {
-          "package_name": "kr.appfactory.billiard"
+          "package_name": "kr.appfactory.golf"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1025462847266-abldq1fkrn4llh2shk3dfsjdo36gd9t7.apps.googleusercontent.com",
+          "client_id": "287201327941-fl4p1h0jl8dlj08vbrd6ck5pii35jgar.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAxktqOQC0vC9eL622AzlJGwtSs2VHAH00"
+          "current_key": "AIzaSyDl20ujAbi5OWfE6JRiteHD_L8Dj3Vyk50"
         }
       ],
       "services": {

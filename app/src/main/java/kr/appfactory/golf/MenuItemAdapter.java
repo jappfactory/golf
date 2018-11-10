@@ -1,6 +1,5 @@
-package kr.appfactory.billiard;
+package kr.appfactory.golf;
 
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,9 +7,7 @@ import android.widget.BaseAdapter;
 import android.content.Context;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuItemAdapter  extends BaseAdapter {

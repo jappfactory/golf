@@ -1,4 +1,4 @@
-package kr.appfactory.billiard;
+package kr.appfactory.golf;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

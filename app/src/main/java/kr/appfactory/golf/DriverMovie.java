@@ -1,4 +1,4 @@
-package kr.appfactory.billiard;
+package kr.appfactory.golf;
 
 public class DriverMovie {
 

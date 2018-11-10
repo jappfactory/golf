@@ -1,4 +1,4 @@
-package kr.appfactory.billiard;
+package kr.appfactory.golf;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,18 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChannelFragment extends Fragment implements AbsListView.OnScrollListener {
+public class SearchFragment extends Fragment implements AbsListView.OnScrollListener {
 
     private boolean lastItemVisibleFlag = false;    // 리스트 스크롤이 마지막 셀(맨 바닥)로 이동했는지 체크할 변수
     public  ListView driverMovieListView;
@@ -43,16 +39,11 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
     public int loadingresult = 0;
     Toolbar myToolbar;
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
 
     Activity activity;
+    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
 
-
-    String target ;
     private OnFragmentInteractionListener mListener;
 
 
@@ -62,41 +53,54 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
 
         activity = (Activity) getActivity();
     }
-    public ChannelFragment() {}
+    public SearchFragment() {}
 
-    public static ChannelFragment newInstance(String param1, String param2  ) {
-        ChannelFragment fragment = new ChannelFragment();
+
+    public static SearchFragment newInstance(String param1) {
+        SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
 
-        // progressBar.setVisibility(View.GONE);
 
-
+        //progressBar.setVisibility(View.GONE);
     }
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle b) {
         super.onActivityCreated(b);
-         //target = mParam1;
 
-        driverMovieListView  = (ListView) getView().findViewById(R.id.subChannelListView);
+        driverMovieListView  = (ListView) getView().findViewById(R.id.subSearchListView);
         driverMovieList = new ArrayList<DriverMovie>();
         driveradapter = new DriverMovieListAdapter(activity, driverMovieList, this);
         driverMovieListView.setAdapter(driveradapter);
+
+
+
+
+        //          Toast.makeText (activity, "isEmpty"  , Toast.LENGTH_LONG).show();
+/*
+        String totalResults= SharedPreference.getSharedPreference(getActivity(), "totalResults");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+
+            totalResults = decimalFormat.format(Double.parseDouble(totalResults.toString().replaceAll(",", "")));
+            TextView searchcnt = (TextView) getView().findViewById(R.id.searchcnt);
+            searchcnt.setText(totalResults);*/
 
 
         driverMovieListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -111,16 +115,19 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
                 intent.putExtra("publishedAt",""+ driverMovieList.get(position).getMovie_date());
                 intent.putExtra("thum_pic",""+ driverMovieList.get(position).getThum_img());
 
+
                 view.getContext().startActivity(intent);
 
             }
         });
 
-
         //progressBar.setVisibility(View.GONE);
         driverMovieListView.setOnScrollListener(this);
         // 다음 데이터를 불러온다.
-        getItem(mParam1);
+
+        target = target + mParam1 +"&pageToken=";
+
+        getItem(target);
     }
 
     public void progressBarShow(){
@@ -161,14 +168,18 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastItemVisibleFlag && mLockListView == false) {
             // 화면이 바닦에 닿을때 처리
             // 로딩중을 알리는 프로그레스바를 보인다.
-            progressBarShow();
             //progressBar.setVisibility(View.VISIBLE);
+            progressBarShow();
 
-            //String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=골프+퍼터+레슨&pageToken=";
-            String nextPageToken= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
-            target = mParam1 + nextPageToken;
 
-            //Toast.makeText (getActivity(), "nextPageToken" + nextPageToken, Toast.LENGTH_LONG).show();
+
+            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
+            String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
+
+
+            target = target + mParam1 +"&pageToken="+ aa;
+
+
             // 다음 데이터를 불러온다.
             getItem(target);
         }
@@ -180,39 +191,36 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
         // visibleItemCount : 화면에 보이는 리스트 아이템의 갯수
         // totalItemCount : 리스트 전체의 총 갯수
         // 리스트의 갯수가 0개 이상이고, 화면에 보이는 맨 하단까지의 아이템 갯수가 총 갯수보다 크거나 같을때.. 즉 리스트의 끝일때. true
-
-        String nextPageToken= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
-        if(nextPageToken.isEmpty()) lastItemVisibleFlag = false;
-        else  lastItemVisibleFlag = true;
-        //Toast.makeText (getActivity(), "firstVisibleItem" + firstVisibleItem, Toast.LENGTH_LONG).show();
-        //Toast.makeText (getActivity(), "visibleItemCount" + visibleItemCount, Toast.LENGTH_LONG).show();
-       // Toast.makeText (getActivity(), "totalItemCount" + totalItemCount, Toast.LENGTH_LONG).show();
+        lastItemVisibleFlag = true;
+       // Toast.makeText (getActivity(), "위로" , Toast.LENGTH_LONG).show();
     }
 
     public void getItem(String target){
         loading ++ ;
         loadingresult = loading % 10;
         if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
-        //AdsFull.getInstance(getActivity()).setAdsFull();
+       // AdsFull.getInstance(getActivity()).setAdsFull();
+        //Toast.makeText (getActivity(), "로딩 카운트 : " + loadingresult , Toast.LENGTH_SHORT).show();
 
-        //Toast.makeText (activity, "클릭 target : " + target  , Toast.LENGTH_LONG).show();
-
-       // Log.d("target", ""+target);
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;
-        //Log.d("target", ""+target);
+        Log.d("target", ""+target);
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
 
-        // driverMovieListView.setAdapter(driveradapter);
-        //Log.d("driverMovieList6", ""+driverMovieList);
+
+
+       // driverMovieListView.setAdapter(driveradapter);
+        Log.d("driverMovieList6", ""+driverMovieList);
 
         // 1초 뒤 프로그레스바를 감추고 데이터를 갱신하고, 중복 로딩 체크하는 Lock을 했던 mLockListView변수를 풀어준다.
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
+
                 try {
+
                     driveradapter.notifyDataSetChanged();
 
                     String totalResults= SharedPreference.getSharedPreference(getActivity(), "totalResults");
@@ -224,35 +232,31 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
                     // progressBar.setVisibility(View.GONE);
                     progressBarHidden();
                     mLockListView = false;
+
                 }catch  (Exception e) {
                     e.printStackTrace();
                 }
-
+               // driveradapter.setNotifyOnChange(false);
 
 
             }
         },1000);
+
 
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
+        //new LoadMovieTask(getContext(), driverMovieList).execute();
 
-       // Toast.makeText (activity, "mParam1" + mParam1   , Toast.LENGTH_SHORT).show();
-       // Toast.makeText (activity, "mParam2" + mParam2   , Toast.LENGTH_SHORT).show();
-
-        View view=inflater.inflate(R.layout.fragment_channel, container, false);
+        View view=inflater.inflate(R.layout.fragment_search, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
 
         myToolbar = (Toolbar) getActivity().findViewById(R.id.main_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        actionBar.setTitle(mParam2);
-        //TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        //title.setText(mParam2);
-
+        actionBar.setTitle("\""+mParam1+"\" 로 검색된 결과");
 
         return view;
     }
@@ -271,6 +275,7 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
         super.onDetach();
         mListener = null;
 
+       // new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target).cancel(true);
 
     }
 

@@ -1,9 +1,8 @@
-package kr.appfactory.billiard;
+package kr.appfactory.golf;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
