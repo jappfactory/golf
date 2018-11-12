@@ -36,6 +36,7 @@ public class FavoritesFragment extends Fragment {
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    private static  int networkYn = 0;
     Toolbar myToolbar;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -73,8 +74,6 @@ public class FavoritesFragment extends Fragment {
         if (getArguments() != null) {
 
         }
-
-        // progressBar.setVisibility(View.GONE);
 
 
     }
@@ -175,8 +174,8 @@ public class FavoritesFragment extends Fragment {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
 
-       // Toast.makeText (activity, "mParam1" + mParam1   , Toast.LENGTH_SHORT).show();
-       // Toast.makeText (activity, "mParam2" + mParam2   , Toast.LENGTH_SHORT).show();
+        networkYn = ((MainActivity)getActivity()).Online();
+        if(networkYn==2) ((MainActivity)getActivity()).NotOnline();
 
         View view=inflater.inflate(R.layout.fragment_favorites, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
@@ -188,8 +187,6 @@ public class FavoritesFragment extends Fragment {
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         actionBar.setTitle("My 즐겨찾기");
 
-       // TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        //title.setText("My 즐겨찾기");
 
 
         return view;

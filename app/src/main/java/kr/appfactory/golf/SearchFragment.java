@@ -37,6 +37,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    private static  int networkYn = 0;
     Toolbar myToolbar;
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
@@ -76,8 +77,6 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
 
         }
 
-
-        //progressBar.setVisibility(View.GONE);
     }
 
 
@@ -90,17 +89,6 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
         driveradapter = new DriverMovieListAdapter(activity, driverMovieList, this);
         driverMovieListView.setAdapter(driveradapter);
 
-
-
-
-        //          Toast.makeText (activity, "isEmpty"  , Toast.LENGTH_LONG).show();
-/*
-        String totalResults= SharedPreference.getSharedPreference(getActivity(), "totalResults");
-        DecimalFormat decimalFormat = new DecimalFormat("#,###");
-
-            totalResults = decimalFormat.format(Double.parseDouble(totalResults.toString().replaceAll(",", "")));
-            TextView searchcnt = (TextView) getView().findViewById(R.id.searchcnt);
-            searchcnt.setText(totalResults);*/
 
 
         driverMovieListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -121,7 +109,6 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
             }
         });
 
-        //progressBar.setVisibility(View.GONE);
         driverMovieListView.setOnScrollListener(this);
         // 다음 데이터를 불러온다.
 
@@ -176,10 +163,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
             String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
-
             target = target + mParam1 +"&pageToken="+ aa;
-
-
             // 다음 데이터를 불러온다.
             getItem(target);
         }
@@ -192,7 +176,6 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
         // totalItemCount : 리스트 전체의 총 갯수
         // 리스트의 갯수가 0개 이상이고, 화면에 보이는 맨 하단까지의 아이템 갯수가 총 갯수보다 크거나 같을때.. 즉 리스트의 끝일때. true
         lastItemVisibleFlag = true;
-       // Toast.makeText (getActivity(), "위로" , Toast.LENGTH_LONG).show();
     }
 
     public void getItem(String target){
@@ -207,9 +190,6 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
 
-
-
-       // driverMovieListView.setAdapter(driveradapter);
 
         // 1초 뒤 프로그레스바를 감추고 데이터를 갱신하고, 중복 로딩 체크하는 Lock을 했던 mLockListView변수를 풀어준다.
         new Handler().postDelayed(new Runnable() {
@@ -227,14 +207,12 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
                     TextView searchcnt =  getView().findViewById(R.id.searchcnt);
                     searchcnt.setText(totalResults);
 
-                    // progressBar.setVisibility(View.GONE);
                     progressBarHidden();
                     mLockListView = false;
 
                 }catch  (Exception e) {
                     e.printStackTrace();
                 }
-               // driveradapter.setNotifyOnChange(false);
 
 
             }
@@ -272,8 +250,6 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
     public void onDetach() {
         super.onDetach();
         mListener = null;
-
-       // new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target).cancel(true);
 
     }
 

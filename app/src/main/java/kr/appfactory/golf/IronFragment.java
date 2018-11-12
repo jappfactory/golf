@@ -40,6 +40,7 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    private static  int networkYn = 0;
     Toolbar myToolbar;
 
 
@@ -105,9 +106,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
         });
 
 
-        //progressBar.setVisibility(View.GONE);
-
-        //Log.d("driverMovieList6", ""+driverMovieList);
         driverMovieListView.setOnScrollListener(this);
 
         // 다음 데이터를 불러온다.
@@ -171,7 +169,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
         // totalItemCount : 리스트 전체의 총 갯수
         // 리스트의 갯수가 0개 이상이고, 화면에 보이는 맨 하단까지의 아이템 갯수가 총 갯수보다 크거나 같을때.. 즉 리스트의 끝일때. true
         lastItemVisibleFlag = true;
-        // Toast.makeText (getActivity(), "위로" , Toast.LENGTH_LONG).show();
     }
 
     public void getItem(String target){
@@ -179,15 +176,12 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
         loading ++ ;
         loadingresult = loading % 10;
         if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
-        //AdsFull.getInstance(getActivity()).setAdsFull();
 
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;
-        //Log.d("target", ""+target);
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
 
-        // driverMovieListView.setAdapter(driveradapter);
 
         // 1초 뒤 프로그레스바를 감추고 데이터를 갱신하고, 중복 로딩 체크하는 Lock을 했던 mLockListView변수를 풀어준다.
         new Handler().postDelayed(new Runnable() {
@@ -204,7 +198,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
                     TextView searchcnt = (TextView) getView().findViewById(R.id.searchcnt);
                     searchcnt.setText(totalResults);
 
-                    // progressBar.setVisibility(View.GONE);
                     progressBarHidden();
                     mLockListView = false;
                 }catch  (Exception e) {
@@ -212,15 +205,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
                 }
 
 
-                // driveradapter.setNotifyOnChange(false);
-
- /*               int fVisible = driverMovieListView.getFirstVisiblePosition();
-                View vFirst = driverMovieListView.getChildAt(0);
-                int pos = 0;
-                if (vFirst != null) pos = vFirst.getTop();
-
-//Restore the position
-                driverMovieListView.setSelectionFromTop(fVisible, pos);*/
 
             }
         },1000);
@@ -231,8 +215,9 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
-        //new LoadMovieTask(getContext(), driverMovieList).execute();
 
+        networkYn = ((MainActivity)getActivity()).Online();
+        if(networkYn==2) ((MainActivity)getActivity()).NotOnline();
         View view=inflater.inflate(R.layout.fragment_iron, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
 
@@ -242,8 +227,7 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         actionBar.setTitle("클럽별 레슨 영상 - 아이언");
 
-        //TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        //title.setText("클럽별 레슨 영상 - 아이언");
+
 
         final Button driverButton = (Button) view.findViewById(R.id.driverButton);
         final Button woodButton = (Button) view.findViewById(R.id.woodButton);
@@ -271,8 +255,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new DriverFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
 
             }
         });
@@ -291,8 +273,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
                 fragmentTransaction.replace(R.id.fragment, new WoodFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -312,8 +292,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
                 fragmentTransaction.replace(R.id.fragment, new IronFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -331,8 +309,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new WedgeFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
 
             }
         });
@@ -350,12 +326,9 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new PutterFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
-        //progressBar.setVisibility(View.GONE);
 
         return view;
     }
@@ -374,7 +347,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
         super.onDetach();
         mListener = null;
 
-        // new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target).cancel(true);
 
     }
 

@@ -40,6 +40,7 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    private static  int networkYn = 0;
     Toolbar myToolbar;
 
 
@@ -71,9 +72,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
 
         }
 
-        // progressBar.setVisibility(View.GONE);
-
-
     }
 
 
@@ -104,8 +102,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
             }
         });
 
-
-       // progressBar.setVisibility(View.GONE);
 
         driverMovieListView.setOnScrollListener(this);
 
@@ -169,7 +165,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
         // totalItemCount : 리스트 전체의 총 갯수
         // 리스트의 갯수가 0개 이상이고, 화면에 보이는 맨 하단까지의 아이템 갯수가 총 갯수보다 크거나 같을때.. 즉 리스트의 끝일때. true
         lastItemVisibleFlag = true;
-        // Toast.makeText (getActivity(), "위로" , Toast.LENGTH_LONG).show();
     }
 
     public void getItem(String target){
@@ -177,23 +172,18 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
         loading ++ ;
         loadingresult = loading % 10;
         if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
-       //AdsFull.getInstance(getActivity()).setAdsFull();
 
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;
-        //Log.d("target", ""+target);
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
 
-        // driverMovieListView.setAdapter(driveradapter);
         Log.d("driverMovieList6", ""+driverMovieList);
 
         // 1초 뒤 프로그레스바를 감추고 데이터를 갱신하고, 중복 로딩 체크하는 Lock을 했던 mLockListView변수를 풀어준다.
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-
 
                 try {
                     driveradapter.notifyDataSetChanged();
@@ -202,16 +192,11 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
                     totalResults = decimalFormat.format(Double.parseDouble(totalResults.toString().replaceAll(",","")));
                     TextView searchcnt = (TextView) getView().findViewById(R.id.searchcnt);
                     searchcnt.setText(totalResults);
-
-                    // progressBar.setVisibility(View.GONE);
                     progressBarHidden();
                     mLockListView = false;
                 }catch  (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
 
             }
         },1000);
@@ -221,7 +206,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
-        //new LoadMovieTask(getContext(), driverMovieList).execute();
 
         View view=inflater.inflate(R.layout.fragment_wedge, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
@@ -232,8 +216,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         actionBar.setTitle("클럽별 레슨 영상 - 웨지");
 
-        //TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        //title.setText("클럽별 레슨 영상 - 웨지");
 
         final Button driverButton = (Button) view.findViewById(R.id.driverButton);
         final Button woodButton = (Button) view.findViewById(R.id.woodButton);
@@ -249,7 +231,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
             @Override
             public void onClick(View view) {
 
-
                 driverButton.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 woodButton.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 ironButton.setBackgroundColor(getResources().getColor(R.color.colorBlue));
@@ -257,13 +238,10 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
                 putterButton.setBackgroundColor(getResources().getColor(R.color.colorBlue));
 
 
-
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new DriverFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
 
             }
         });
@@ -282,8 +260,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
                 fragmentTransaction.replace(R.id.fragment, new WoodFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -303,8 +279,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
                 fragmentTransaction.replace(R.id.fragment, new IronFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -322,8 +296,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new WedgeFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
 
             }
         });
@@ -341,11 +313,8 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new PutterFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
-        //progressBar.setVisibility(View.GONE);
 
         return view;
     }
@@ -363,8 +332,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
     public void onDetach() {
         super.onDetach();
         mListener = null;
-
-        // new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target).cancel(true);
 
     }
 

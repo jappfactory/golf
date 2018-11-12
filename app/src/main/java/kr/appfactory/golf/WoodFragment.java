@@ -40,6 +40,7 @@ public class WoodFragment extends Fragment implements AbsListView.OnScrollListen
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    private static  int networkYn = 0;
     Toolbar myToolbar;
 
 

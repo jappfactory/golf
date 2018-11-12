@@ -230,8 +230,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("클럽별 레슨 영상 - 드라이버");
-        //TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        //title.setText("클럽별 레슨 영상 - 드라이버");
 
 
         final Button driverButton = (Button) view.findViewById(R.id.driverButton);
@@ -244,10 +242,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
         driverButton.setBackgroundColor(getResources().getColor(R.color.colorBlueDark));
 
         networkYn = ((MainActivity)getActivity()).Online();
-
-        Toast.makeText (activity, "networkYn" + networkYn   , Toast.LENGTH_SHORT).show();
-
-
         if(networkYn==2) ((MainActivity)getActivity()).NotOnline();
 
 
@@ -268,8 +262,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new DriverFragment());
                 fragmentTransaction.commit();
-              //  Online();
-              //  if(networkYn==2) NotOnline();
 
             }
         });
@@ -288,8 +280,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
                 fragmentTransaction.replace(R.id.fragment, new WoodFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -309,8 +299,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
                 fragmentTransaction.replace(R.id.fragment, new IronFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -328,8 +316,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new WedgeFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
 
             }
         });
@@ -347,11 +333,8 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new PutterFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
-        //progressBar.setVisibility(View.GONE);
 
         return view;
     }
@@ -369,8 +352,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
     public void onDetach() {
         super.onDetach();
         mListener = null;
-
-       // new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target).cancel(true);
 
     }
 

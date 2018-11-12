@@ -40,6 +40,7 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    private static  int networkYn = 0;
     Toolbar myToolbar;
 
 
@@ -72,8 +73,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
 
         }
 
-        // progressBar.setVisibility(View.GONE);
-
 
     }
 
@@ -104,8 +103,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
             }
         });
 
-
-       // progressBar.setVisibility(View.GONE);
 
         driverMovieListView.setOnScrollListener(this);
         // 다음 데이터를 불러온다.
@@ -150,7 +147,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastItemVisibleFlag && mLockListView == false) {
             // 화면이 바닦에 닿을때 처리
             // 로딩중을 알리는 프로그레스바를 보인다.
-            //progressBar.setVisibility(View.VISIBLE);
             progressBarShow();
 
             String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=골프+퍼터+레슨&pageToken=";
@@ -175,15 +171,11 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
         loading ++ ;
         loadingresult = loading % 10;
         if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
-       //AdsFull.getInstance(getActivity()).setAdsFull();
 
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;
-        //Log.d("target", ""+target);
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
-
-        // driverMovieListView.setAdapter(driveradapter);
 
         // 1초 뒤 프로그레스바를 감추고 데이터를 갱신하고, 중복 로딩 체크하는 Lock을 했던 mLockListView변수를 풀어준다.
         new Handler().postDelayed(new Runnable() {
@@ -201,7 +193,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
                     TextView searchcnt = (TextView) getView().findViewById(R.id.searchcnt);
                     searchcnt.setText(totalResults);
 
-                    // progressBar.setVisibility(View.GONE);
                     progressBarHidden();
                     mLockListView = false;
                 }catch  (Exception e) {
@@ -218,7 +209,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
-        //new LoadMovieTask(getContext(), driverMovieList).execute();
 
         View view=inflater.inflate(R.layout.fragment_putter, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
@@ -228,8 +218,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         actionBar.setTitle("클럽별 레슨 영상 - 퍼터");
-        //TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        //title.setText("클럽별 레슨 영상 - 퍼터");
 
 
         final Button driverButton = (Button) view.findViewById(R.id.driverButton);
@@ -259,8 +247,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new DriverFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
 
             }
         });
@@ -279,8 +265,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
                 fragmentTransaction.replace(R.id.fragment, new WoodFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -300,8 +284,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
                 fragmentTransaction.replace(R.id.fragment, new IronFragment());
                 fragmentTransaction.commit();
 
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
 
@@ -319,8 +301,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new WedgeFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
 
             }
         });
@@ -338,12 +318,8 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new PutterFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
             }
         });
-
-        //progressBar.setVisibility(View.GONE);
 
         return view;
     }
@@ -361,9 +337,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     public void onDetach() {
         super.onDetach();
         mListener = null;
-
-        // new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target).cancel(true);
-
     }
 
     public interface OnFragmentInteractionListener {

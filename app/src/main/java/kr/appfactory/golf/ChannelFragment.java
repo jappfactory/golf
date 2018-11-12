@@ -37,6 +37,7 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
     public int loading = 0;
     public int loadingresult = 0;
     Toolbar myToolbar;
+    private static  int networkYn = 0;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -77,9 +78,6 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
 
         }
 
-        // progressBar.setVisibility(View.GONE);
-
-
     }
 
 
@@ -111,8 +109,6 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
             }
         });
 
-
-        //progressBar.setVisibility(View.GONE);
         driverMovieListView.setOnScrollListener(this);
         // 다음 데이터를 불러온다.
         getItem(mParam1);
@@ -157,13 +153,9 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
             // 화면이 바닦에 닿을때 처리
             // 로딩중을 알리는 프로그레스바를 보인다.
             progressBarShow();
-            //progressBar.setVisibility(View.VISIBLE);
-
-            //String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=골프+퍼터+레슨&pageToken=";
-            String nextPageToken= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
+      String nextPageToken= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
             target = mParam1 + nextPageToken;
 
-            //Toast.makeText (getActivity(), "nextPageToken" + nextPageToken, Toast.LENGTH_LONG).show();
             // 다음 데이터를 불러온다.
             getItem(target);
         }
@@ -179,28 +171,18 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
         String nextPageToken= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
         if(nextPageToken.isEmpty()) lastItemVisibleFlag = false;
         else  lastItemVisibleFlag = true;
-        //Toast.makeText (getActivity(), "firstVisibleItem" + firstVisibleItem, Toast.LENGTH_LONG).show();
-        //Toast.makeText (getActivity(), "visibleItemCount" + visibleItemCount, Toast.LENGTH_LONG).show();
-       // Toast.makeText (getActivity(), "totalItemCount" + totalItemCount, Toast.LENGTH_LONG).show();
     }
 
     public void getItem(String target){
         loading ++ ;
         loadingresult = loading % 10;
         if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
-        //AdsFull.getInstance(getActivity()).setAdsFull();
 
-        //Toast.makeText (activity, "클릭 target : " + target  , Toast.LENGTH_LONG).show();
-
-       // Log.d("target", ""+target);
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;
-        //Log.d("target", ""+target);
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
 
-        // driverMovieListView.setAdapter(driveradapter);
-        //Log.d("driverMovieList6", ""+driverMovieList);
 
         // 1초 뒤 프로그레스바를 감추고 데이터를 갱신하고, 중복 로딩 체크하는 Lock을 했던 mLockListView변수를 풀어준다.
         new Handler().postDelayed(new Runnable() {
@@ -216,7 +198,6 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
                     TextView searchcnt =  getView().findViewById(R.id.searchcnt);
                     searchcnt.setText(totalResults);
 
-                    // progressBar.setVisibility(View.GONE);
                     progressBarHidden();
                     mLockListView = false;
                 }catch  (Exception e) {
@@ -234,8 +215,8 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
 
-       // Toast.makeText (activity, "mParam1" + mParam1   , Toast.LENGTH_SHORT).show();
-       // Toast.makeText (activity, "mParam2" + mParam2   , Toast.LENGTH_SHORT).show();
+        networkYn = ((MainActivity)getActivity()).Online();
+        if(networkYn==2) ((MainActivity)getActivity()).NotOnline();
 
         View view=inflater.inflate(R.layout.fragment_channel, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
@@ -245,8 +226,6 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         actionBar.setTitle(mParam2);
-        //TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        //title.setText(mParam2);
 
 
         return view;
