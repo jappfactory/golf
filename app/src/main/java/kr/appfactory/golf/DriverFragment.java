@@ -109,7 +109,7 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
 
         driverMovieListView.setOnScrollListener(this);
 
-        Toast.makeText (activity, "" + target , Toast.LENGTH_LONG).show();
+        //Toast.makeText (activity, "" + target , Toast.LENGTH_LONG).show();
 
         // 다음 데이터를 불러온다.
         getItem(target);

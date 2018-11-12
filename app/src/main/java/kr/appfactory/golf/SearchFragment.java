@@ -112,7 +112,8 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
         driverMovieListView.setOnScrollListener(this);
         // 다음 데이터를 불러온다.
 
-        target = target + mParam1 +"&pageToken=";
+        String Keyword = ((MainActivity)getActivity()).getURLEncode(""+mParam1);
+        target = target + Keyword +"&pageToken=";
 
         getItem(target);
     }
@@ -163,9 +164,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
             String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
-
             String Keyword = ((MainActivity)getActivity()).getURLEncode(""+mParam1);
-
             target = target + Keyword +"&pageToken="+ aa;
             // 다음 데이터를 불러온다.
             getItem(target);
@@ -216,6 +215,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
                 }catch  (Exception e) {
                     e.printStackTrace();
                 }
+               // driveradapter.setNotifyOnChange(false);
 
 
             }
@@ -253,6 +253,8 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
+       // new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target).cancel(true);
 
     }
 

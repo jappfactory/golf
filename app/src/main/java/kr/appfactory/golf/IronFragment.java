@@ -45,6 +45,7 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
 
 
     Activity activity;
+
     String Keyword = ((MainActivity)getActivity()).getURLEncode("골프+아이언+레슨");
     String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
 
@@ -151,7 +152,7 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
             // 로딩중을 알리는 프로그레스바를 보인다.
             progressBarShow();
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
+            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
             target = target + aa;
 
