@@ -598,7 +598,7 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    public void Online() {
+    public  int  Online() {
         ConnectivityManager manager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -616,7 +616,9 @@ public class MainActivity extends AppCompatActivity  {
             networkYn =2;
 
         }
+        return networkYn;
     }
+
 
 }
 
@@ -747,11 +749,6 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
                                 .getString("url"); // 썸내일 이미지 URL값
 
 
-                        Log.e("videoId", ""+videoId);
-                        Log.e("subjectText", ""+subjectText);
-                        Log.e("viewDate", ""+viewDate);
-                        Log.e("thum_pic", ""+thum_pic);
-
 
                         viewCnt = "0";
                         DriverMovie drivermovie = new DriverMovie(thum_pic, subjectText, viewDate, viewCnt, videoId , descriptionText);
@@ -777,11 +774,6 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
                     thum_pic = object.getJSONObject("snippet")
                             .getJSONObject("thumbnails").getJSONObject("medium")
                             .getString("url"); // 썸내일 이미지 URL값
-
-                  Log.e("videoId", ""+videoId);
-                   Log.e("subjectText", ""+subjectText);
-                    Log.e("viewDate", ""+viewDate);
-                   Log.e("thum_pic", ""+thum_pic);
 
                     viewCnt = "0";
                     DriverMovie drivermovie = new DriverMovie(thum_pic, subjectText, viewDate, viewCnt, videoId , descriptionText);

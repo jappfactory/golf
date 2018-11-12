@@ -211,15 +211,7 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
                 }
 
 
-                // driveradapter.setNotifyOnChange(false);
 
- /*               int fVisible = driverMovieListView.getFirstVisiblePosition();
-                View vFirst = driverMovieListView.getChildAt(0);
-                int pos = 0;
-                if (vFirst != null) pos = vFirst.getTop();
-
-//Restore the position
-                driverMovieListView.setSelectionFromTop(fVisible, pos);*/
 
             }
         },1000);

@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+
+    private static  int networkYn = 0;
     Toolbar myToolbar;
 
     Activity activity;
@@ -176,7 +179,6 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
 
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;
-        Log.d("target", ""+target);
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
 
@@ -241,6 +243,14 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
 
         driverButton.setBackgroundColor(getResources().getColor(R.color.colorBlueDark));
 
+        networkYn = ((MainActivity)getActivity()).Online();
+
+        Toast.makeText (activity, "networkYn" + networkYn   , Toast.LENGTH_SHORT).show();
+
+
+        if(networkYn==2) ((MainActivity)getActivity()).NotOnline();
+
+
         driverButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -258,8 +268,8 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new DriverFragment());
                 fragmentTransaction.commit();
-                // Online();
-                // if(networkYn==2) NotOnline();
+              //  Online();
+              //  if(networkYn==2) NotOnline();
 
             }
         });

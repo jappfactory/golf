@@ -110,7 +110,7 @@ public class FavoritesFragment extends Fragment {
             String thum_pic = cursor.getString(5);
             String viewCnt="";
 
-            Log.d("videoId : ", videoId);
+            //Log.d("videoId : ", videoId);
             DriverMovie drivermovie = new DriverMovie(thum_pic, subjectText, publishedAt, viewCnt, videoId , descriptionText);
             driverMovieList.add(drivermovie);
         i++;
