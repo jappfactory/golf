@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -44,8 +45,11 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 /**dc dddd
@@ -382,151 +386,6 @@ public class MainActivity extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(item);
     }
-    /*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)){
-
-
-            // 데이터 원본 준비
-            itemList =  new ArrayList<MenuItema>();
-
-
-            //어댑터 생성
-            menuItemAdapter = new MenuItemAdapter(activity,  itemList);
-
-            //어댑터 연결
-            mnuListView = (ListView)  findViewById(R.id.club_lesson);
-
-            //Toast.makeText (activity, "클릭3" + mnuListView  , Toast.LENGTH_LONG).show();
-            mnuListView.setAdapter(menuItemAdapter);
-
-
-            itemList.add(new MenuItema("드라이버 레슨 영상","driver"));
-            itemList.add(new MenuItema("우드 레슨 영상","wood"));
-            itemList.add(new MenuItema("아이언 레슨 영상","iron"));
-            itemList.add(new MenuItema("웨지 레슨 영상","wedge"));
-            itemList.add(new MenuItema("퍼터 레슨 영상","putter"));
-            //  menuItemAdapter = new MenuItemAdapter(context,  itemList, this);
-
-            mnuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                    if(itemList.get(position).getMenu_link() =="driver")  fragmentTransaction.replace(R.id.fragment, new DriverFragment());
-                    if(itemList.get(position).getMenu_link() =="wood")  fragmentTransaction.replace(R.id.fragment, new WoodFragment());
-                    if(itemList.get(position).getMenu_link() =="iron")  fragmentTransaction.replace(R.id.fragment, new IronFragment());
-                    if(itemList.get(position).getMenu_link() =="wedge")  fragmentTransaction.replace(R.id.fragment, new WedgeFragment());
-                    if(itemList.get(position).getMenu_link() =="putter")  fragmentTransaction.replace(R.id.fragment, new PutterFragment());
-
-
-                    fragmentTransaction.commit();
-                    mDrawerLayout.closeDrawers();
-
-                   // Toast.makeText (activity, "클릭 getMenu_title" + itemList.get(position).getMenu_title()  , Toast.LENGTH_SHORT).show();
-                    //Toast.makeText (activity, "클릭 getMenu_link" + itemList.get(position).getMenu_link()  , Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            // 데이터 원본 준비
-            itemList2 =  new ArrayList<MenuItema>();
-
-            itemList2.add(new MenuItema("명품스윙 에이미 조 골프 레슨","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PUKby5Cq9jArperhkdbX1X6g&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("왕초보 골프입문 시리즈 - 심짱","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLCW1r5BxeqUXcarRbwfJuxEN94fS7XQb8&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("독학골퍼를 위한 셀프골프레슨 - 심짱","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLCW1r5BxeqUXIYGmydOpcrt3HxiEugQpP&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("계속보면 좋은 골프기초 - 심짱","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLCW1r5BxeqUWtGBztPJqu088ygieNfyQV&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("박대성프로의 1분레슨","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLUT6r8FkJUXgS5hOfQBiM5OPt2zWiXKdK&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("굿샷김프로 - 동영상 골프레슨","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLatlCU2UD5ayXEonr7kzJjAhuh_e807AM&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("정프로의 클라쓰 몰아보기!","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLJjPXwl6J0C8Djy7W-4osYWsL6bJdU_hO&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("상위1%골프 레슨","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLTKm3iaNcU4JHavt0JzjiD62DO46CqjKf&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("중급 싱글되기 골프레슨 ~ ^^","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL4OYEpDO4EFttKj5gBtE9lmlBHOgadIW9&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("비거리는 곧 자신감 장타레슨","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLBRks3VEudicyy188_sKojJm0G7DuebDF&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("스코어의 꽃 숏게임","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLBRks3VEudie9OjfJMgepjJx4YXSwuZSB&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("잘 배운 버릇 평생가는 골프기본기","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLBRks3VEudif6y3TYCqpiJOv2u0sdeC_4&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("초보 골프 입문 골퍼분들께 ~ ^^","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL4OYEpDO4EFu4wPcPtZP_ptWC5luU9LO6&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("[초보레슨]윤소원의 비기너스 골프","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjXreuI8oh52DesY3CJCJ1Ya&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("[레슨]박교희의 쉬운골프","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjWKyfVHpswFXvxRCij2VBQq&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("[레슨]이동익의 홈메이드 골프","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjX5jn8zDZJ1GrjwF05InL2G&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("[레슨]임진한의 스페셜레슨","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjVbOlr72df-mVl1WIKMtEBt&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("PGA Class A 함순웅의 골프채널","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=UUluR-EQnCekFsG0IJwM2Ihg&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("이근화프로 (Monit Golf)","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8Tiep6g2ub79ksKBhd_Ng_q9&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("문성모프로 (Monit Golf)","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8Tg_iXxRyJVqFUUvuZwRKw81&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("전수빈프로 (Monit Golf)","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TgWl3dupeExzdIS2KwdETMU&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("이효주프로 (Monit Golf)","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TgymOrkKPxCDuXakkFp2SIj&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("김종석프로 (Monit Golf)","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TgllZn3IIma6wanpfSCAEdZ&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-            itemList2.add(new MenuItema("정효민프로 (Monit Golf)","https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TjLFkVBX4a4Ook7HH7yIO2m&maxResults=6&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&pageToken="));
-
-
-
-            //  menuItemAdapter = new MenuItemAdapter(context,  itemList, this);
-
-            //어댑터 생성
-            menuItemAdapter2 = new MenuItemAdapter(activity,  itemList2);
-
-            //어댑터 연결
-            mnuListView2 = (ListView) findViewById(R.id.pro_lesson);
-
-            //Toast.makeText (activity, "클릭3" + mnuListView  , Toast.LENGTH_LONG).show();
-            mnuListView2.setAdapter(menuItemAdapter2);
-
-
-            mnuListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment, ChannelFragment.newInstance(itemList2.get(position).getMenu_link(),itemList2.get(position).getMenu_title()));
-                    fragmentTransaction.commit();
-                    mDrawerLayout.closeDrawers();
-                    //Toast.makeText (activity, "클릭 getMenu_title" + itemList2.get(position).getMenu_title()  , Toast.LENGTH_SHORT).show();
-
-
-
-
-                }
-            });
-
-
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-/*
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Handle navigation view item clicks here.
-       // Toast.makeText (getApplicationContext(), "클릭2"  , Toast.LENGTH_LONG).show();
-
-        int id = item.getItemId();
-
-
-        Toast.makeText (getApplicationContext(), "클릭 id" + id  , Toast.LENGTH_LONG).show();
-
-        transaction.addToBackStack(null);
-        transaction.commit();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
-        drawer.closeDrawer(GravityCompat.START);
-
-        //mDrawerLayout.closeDrawer(); return true;
-
-        return true;
-    }
-
-*/
 
     private class WebViewClientClass extends WebViewClient {
         @Override
@@ -597,6 +456,36 @@ public class MainActivity extends AppCompatActivity  {
 
 
     }
+    /**
+     * getURLEncode
+     */
+    public static String getURLEncode(String content){
+
+        try {
+//          return URLEncoder.encode(content, "utf-8");   // UTF-8
+            return URLEncoder.encode(content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * getURLDecode
+     */
+    public static String getURLDecode(String content){
+
+        try {
+//          return URLEncoder.encode(content, "utf-8");   // UTF-8
+            return URLDecoder.decode(content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
     public  int  Online() {
         ConnectivityManager manager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -692,7 +581,7 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
     }
     protected void onPostExecute(String result) {
         String nextPageToken="";
-        //Log.e("드라이버2", ""+result);
+        Log.e("드라이버2", ""+result);
 
         try {
             JSONObject jsonObject = new JSONObject(result);

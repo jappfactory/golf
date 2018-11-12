@@ -46,7 +46,9 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
     Toolbar myToolbar;
 
     Activity activity;
-    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=골프+드라이버+레슨&pageToken=";
+    String Keyword = ((MainActivity)getActivity()).getURLEncode("골프+드라이버+레슨");
+    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -106,6 +108,9 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
         });
 
         driverMovieListView.setOnScrollListener(this);
+
+        Toast.makeText (activity, "" + target , Toast.LENGTH_LONG).show();
+
         // 다음 데이터를 불러온다.
         getItem(target);
     }
@@ -151,10 +156,10 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
             progressBarShow();
 
 
-
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=골프+드라이버+레슨&pageToken=";
+            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
             target = target + aa;
+            //Toast.makeText (getActivity(), "" + target , Toast.LENGTH_LONG).show();
             // 다음 데이터를 불러온다.
             getItem(target);
         }
