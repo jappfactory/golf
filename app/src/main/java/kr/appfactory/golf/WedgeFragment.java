@@ -178,8 +178,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
 
         new LoadMovieTask(getActivity(), driverMovieList, driverMovieListView, driveradapter, target,"sub").execute();
 
-        Log.d("driverMovieList6", ""+driverMovieList);
-
         // 1초 뒤 프로그레스바를 감추고 데이터를 갱신하고, 중복 로딩 체크하는 Lock을 했던 mLockListView변수를 풀어준다.
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -207,6 +205,8 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
 
+        networkYn = ((MainActivity)getActivity()).Online();
+        if(networkYn==2) ((MainActivity)getActivity()).NotOnline();
         View view=inflater.inflate(R.layout.fragment_wedge, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
 

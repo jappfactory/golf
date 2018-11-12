@@ -72,8 +72,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
 
         }
 
-        // progressBar.setVisibility(View.GONE);
-
 
     }
 
@@ -150,7 +148,6 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastItemVisibleFlag && mLockListView == false) {
             // 화면이 바닦에 닿을때 처리
             // 로딩중을 알리는 프로그레스바를 보인다.
-            //progressBar.setVisibility(View.VISIBLE);
             progressBarShow();
 
             String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=골프+아이언+레슨&pageToken=";

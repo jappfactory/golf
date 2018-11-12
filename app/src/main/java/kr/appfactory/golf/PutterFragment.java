@@ -164,7 +164,6 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
         // totalItemCount : 리스트 전체의 총 갯수
         // 리스트의 갯수가 0개 이상이고, 화면에 보이는 맨 하단까지의 아이템 갯수가 총 갯수보다 크거나 같을때.. 즉 리스트의 끝일때. true
         lastItemVisibleFlag = true;
-        // Toast.makeText (getActivity(), "위로" , Toast.LENGTH_LONG).show();
     }
 
     public void getItem(String target){
@@ -209,6 +208,9 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
+
+        networkYn = ((MainActivity)getActivity()).Online();
+        if(networkYn==2) ((MainActivity)getActivity()).NotOnline();
 
         View view=inflater.inflate(R.layout.fragment_putter, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
