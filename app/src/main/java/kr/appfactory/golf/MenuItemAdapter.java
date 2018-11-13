@@ -49,7 +49,6 @@ public class MenuItemAdapter  extends BaseAdapter {
         menu_title.setText(itemList.get(i).getMenu_title());
         menu_url.setText(itemList.get(i).getMenu_link());
 
-
         return v;
 
     }
