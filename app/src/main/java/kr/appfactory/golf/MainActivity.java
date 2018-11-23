@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
+        AdsFull.getInstance(activity).setAdsFull();
         Button MyfavoritesButton = (Button) findViewById(R.id.MyfavoritesButton);
 
         //즐겨찾기저장추가
