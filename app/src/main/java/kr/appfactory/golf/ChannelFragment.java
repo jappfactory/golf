@@ -36,6 +36,7 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    public int viewcnt = 0;
     Toolbar myToolbar;
     private static  int networkYn = 0;
     private static final String ARG_PARAM1 = "param1";
@@ -85,6 +86,7 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
     public void onActivityCreated(@Nullable Bundle b) {
         super.onActivityCreated(b);
          //target = mParam1;
+        SharedPreference.putSharedPreference(getActivity(), "viewcnt", 0);
 
         driverMovieListView  = (ListView) getView().findViewById(R.id.subChannelListView);
         driverMovieList = new ArrayList<DriverMovie>();
@@ -174,9 +176,9 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
     }
 
     public void getItem(String target){
-        loading ++ ;
-        loadingresult = loading % 10;
-        if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
+       // loading ++ ;
+       // loadingresult = loading % 10;
+        //if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
 
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;

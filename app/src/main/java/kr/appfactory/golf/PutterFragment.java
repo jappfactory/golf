@@ -40,6 +40,7 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    public int viewcnt = 0;
     private static  int networkYn = 0;
     Toolbar myToolbar;
 
@@ -47,7 +48,7 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     Activity activity;
 
     String Keyword = ((MainActivity)getActivity()).getURLEncode("골프+퍼터+레슨");
-    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
+    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
 
     private OnFragmentInteractionListener mListener;
 
@@ -81,6 +82,8 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     @Override
     public void onActivityCreated(@Nullable Bundle b) {
         super.onActivityCreated(b);
+
+        SharedPreference.putSharedPreference(getActivity(), "viewcnt", 0);
 
         driverMovieListView  = (ListView) getView().findViewById(R.id.subPutterListView);
         driverMovieList = new ArrayList<DriverMovie>();
@@ -150,7 +153,7 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
             // 로딩중을 알리는 프로그레스바를 보인다.
             progressBarShow();
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
+            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
             target = target + aa;
             // 다음 데이터를 불러온다.
@@ -168,9 +171,9 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     }
 
     public void getItem(String target){
-        loading ++ ;
-        loadingresult = loading % 10;
-        if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
+       // loading ++ ;
+       // loadingresult = loading % 10;
+      //  if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
 
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
         mLockListView = true;

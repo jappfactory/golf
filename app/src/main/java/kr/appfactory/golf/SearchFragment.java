@@ -37,13 +37,14 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    public int viewcnt = 0;
     private static  int networkYn = 0;
     Toolbar myToolbar;
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
     private String Keyword;
     Activity activity;
-    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
+    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
 
     private OnFragmentInteractionListener mListener;
 
@@ -84,6 +85,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
     public void onActivityCreated(@Nullable Bundle b) {
         super.onActivityCreated(b);
 
+        SharedPreference.putSharedPreference(getActivity(), "viewcnt", 0);
         driverMovieListView  = (ListView) getView().findViewById(R.id.subSearchListView);
         driverMovieList = new ArrayList<DriverMovie>();
         driveradapter = new DriverMovieListAdapter(activity, driverMovieList, this);
@@ -161,7 +163,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
 
 
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
+            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
             target = target + Keyword +"&pageToken="+ aa;
@@ -180,9 +182,9 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
     }
 
     public void getItem(String target){
-        loading ++ ;
-        loadingresult = loading % 10;
-        if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
+        //loading ++ ;
+        //loadingresult = loading % 10;
+        //if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
        // AdsFull.getInstance(getActivity()).setAdsFull();
         //Toast.makeText (getActivity(), "로딩 카운트 : " + loadingresult , Toast.LENGTH_SHORT).show();
 

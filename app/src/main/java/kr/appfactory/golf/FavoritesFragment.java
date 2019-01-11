@@ -36,6 +36,7 @@ public class FavoritesFragment extends Fragment {
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
     public int loadingresult = 0;
+    public int viewcnt = 0;
     private static  int networkYn = 0;
     Toolbar myToolbar;
     private static final String ARG_PARAM1 = "param1";
@@ -84,6 +85,7 @@ public class FavoritesFragment extends Fragment {
         super.onActivityCreated(b);
 
 
+        SharedPreference.putSharedPreference(getActivity(), "viewcnt", 0);
         driverMovieListView  = (ListView) getView().findViewById(R.id.subFavoritesListView);
         driverMovieList = new ArrayList<DriverMovie>();
         driveradapter = new DriverMovieListAdapter(activity, driverMovieList, this);

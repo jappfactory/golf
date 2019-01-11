@@ -28,6 +28,10 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
     public String publishedAt;
     public String thum_pic;
 
+    public int loading = 0;
+    public int loadingresult = 0;
+    public int viewcnt = 0;
+
     DBHelper dbHelper;
 
     YouTubePlayer.OnInitializedListener listener;
@@ -48,6 +52,11 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
         setContentView(R.layout.activity_movie_play);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+
+        viewcnt = SharedPreference.getIntSharedPreference(getApplicationContext(), "viewcnt");
+        viewcnt ++ ;
+        SharedPreference.putSharedPreference(getApplicationContext(), "viewcnt", viewcnt);
+
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView title = (TextView) findViewById(R.id.toolbar_title);
         TextView desc = (TextView) findViewById(R.id.movie_desc);
@@ -64,7 +73,12 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
         desc.setText(videodesc);
 
 
-        //Toast.makeText (getApplicationContext(), "클릭" + videoId , Toast.LENGTH_LONG).show();
+        loadingresult = viewcnt % 5;
+         if (loadingresult == 0 ) AdsFull.getInstance(getApplicationContext()).setAdsFull();
+
+        //Toast.makeText (getApplicationContext(), "클릭" + viewcnt , Toast.LENGTH_LONG).show();
+        //AdsFull.getInstance(getApplicationContext()).setAdsFull();
+
 
 
         youtubeView = (YouTubePlayerView) findViewById(R.id.youtubeView);

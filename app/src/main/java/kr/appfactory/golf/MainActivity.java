@@ -171,8 +171,10 @@ public class MainActivity extends AppCompatActivity  {
         fragmentTransaction.replace(R.id.fragment, new DriverFragment());
         fragmentTransaction.commit();
 
-        AdsFull.getInstance(getApplicationContext()).setAds(this);
+      //  AdsFull.getInstance(getApplicationContext()).setAds(this);
 
+
+        //AdsFull.getInstance(activity).setAdsFull();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
@@ -184,8 +186,6 @@ public class MainActivity extends AppCompatActivity  {
         updateIconBadge(activity,  0);
 
 
-
-        AdsFull.getInstance(activity).setAdsFull();
         Button MyfavoritesButton = (Button) findViewById(R.id.MyfavoritesButton);
 
         //즐겨찾기저장추가
@@ -581,7 +581,7 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
     }
     protected void onPostExecute(String result) {
         String nextPageToken="";
-        Log.e("드라이버2", ""+result);
+        //Log.e("드라이버2", ""+result);
 
         try {
             JSONObject jsonObject = new JSONObject(result);
@@ -610,7 +610,7 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
 
             // Toast.makeText (mContext, "클릭" + jsonArray.length() , Toast.LENGTH_SHORT).show();
 
-            Log.e("jsonArray.length", ""+jsonArray.length());
+           // Log.e("jsonArray.length", ""+jsonArray.length());
 
             while (count < jsonArray.length()) {
                 JSONObject object = jsonArray.getJSONObject(count);

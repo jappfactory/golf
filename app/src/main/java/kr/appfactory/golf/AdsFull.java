@@ -66,7 +66,7 @@ public class AdsFull {
         //MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");//test
 
 //
-
+/*
         Log.d("adView", "" + AdRequest.DEVICE_ID_EMULATOR);
         AdView adView = (AdView) ((Activity) context).findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -74,7 +74,7 @@ public class AdsFull {
                 //.addTestDevice("B3EEABB8EE11C2BE770B684D95219ECB")
                 .build();
         adView.loadAd(adRequest);
-
+*/
     }
 
 

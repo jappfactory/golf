@@ -40,6 +40,7 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
     private  ProgressBar progressBar;                // 데이터 로딩중을 표시할 프로그레스바
     private boolean mLockListView = false;          // 데이터 불러올때 중복안되게 하기위한 변수
     public int loading = 0;
+    public int viewcnt = 0;
     public int loadingresult = 0;
 
     private static  int networkYn = 0;
@@ -47,7 +48,7 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
 
     Activity activity;
     String Keyword = ((MainActivity)getActivity()).getURLEncode("골프+드라이버+레슨");
-    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
+    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
 
 
     private OnFragmentInteractionListener mListener;
@@ -79,6 +80,9 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
     @Override
     public void onActivityCreated(@Nullable Bundle b) {
         super.onActivityCreated(b);
+
+        SharedPreference.putSharedPreference(getActivity(), "viewcnt", 0);
+
 
         driverMovieListView  = (ListView) getView().findViewById(R.id.subDriverListView);
         driverMovieList = new ArrayList<DriverMovie>();
@@ -155,10 +159,20 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
             // 로딩중을 알리는 프로그레스바를 보인다.
             progressBarShow();
 
+/*
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
+            date – 리소스를 만든 날짜를 기준으로 최근 항목부터 시간 순서대로 리소스를 정렬합니다.
+            rating – 높은 평가부터 낮은 평가순으로 리소스를 정렬합니다.
+            relevance – 검색 쿼리에 대한 관련성을 기준으로 리소스를 정렬합니다. 이 매개변수의 기본값입니다.
+            title – 제목에 따라 문자순으로 리소스를 정렬합니다.
+            videoCount – 업로드한 동영상 수에 따라 채널을 내림차순으로 정렬합니다.
+            viewCount – 리소스를 조회수가 높은 항목부터 정렬합니다.
+*/
+            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
             target = target + aa;
+           // Log.e("target", ""+target);
+
             //Toast.makeText (getActivity(), "" + target , Toast.LENGTH_LONG).show();
             // 다음 데이터를 불러온다.
             getItem(target);
@@ -176,10 +190,12 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
     }
 
     public void getItem(String target){
-        loading ++ ;
-        loadingresult = loading % 10;
-        if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
-       // AdsFull.getInstance(getActivity()).setAdsFull();
+
+        Log.e("target", ""+target);
+      //  loading ++ ;
+       // loadingresult = loading % 10;
+       // if (loadingresult == 0 ) AdsFull.getInstance(getActivity()).setAdsFull();
+        //AdsFull.getInstance(getActivity()).setAdsFull();
         //Toast.makeText (getActivity(), "로딩 카운트 : " + loadingresult , Toast.LENGTH_SHORT).show();
 
         // 리스트에 다음 데이터를 입력할 동안에 이 메소드가 또 호출되지 않도록 mLockListView 를 true로 설정한다.
