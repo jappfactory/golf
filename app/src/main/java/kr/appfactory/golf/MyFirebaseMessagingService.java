@@ -26,7 +26,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
     // 메시지 수신
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.i(TAG, "onMessageReceived");
+       // Log.i(TAG, "onMessageReceived");
 
         Map<String, String> data = remoteMessage.getData();
         String title = data.get("title");
@@ -34,9 +34,9 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         String imgurllink = data.get("imgurllink");
         String link = remoteMessage.getData().get("link");
 
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-        Log.d(TAG, "imgurl: " + imgurllink);
+        //Log.d(TAG, "From: " + remoteMessage.getFrom());
+        //Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+        //Log.d(TAG, "imgurl: " + imgurllink);
 
         //Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
 
@@ -72,9 +72,10 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 //테스트
         intent = new Intent(this, MainActivity.class);
         intent.putExtra("str", "value");
+        //intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         //CompatBuilder를 이용한 알림방식
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, (int)(System.currentTimeMillis()/1000) /* Request code */, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -88,8 +89,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         notificationBuilder.setFullScreenIntent(pendingIntent, true);
 
         if(myimgurl!=null) {
-            Log.d(TAG, "myimgurl:"+myimgurl+"/" );
-            Log.d(TAG, "pushtype: bigPicture" );
+            //Log.d(TAG, "myimgurl:"+myimgurl+"/" );
+            //Log.d(TAG, "pushtype: bigPicture" );
             //이미지 온라인 링크를 가져와 비트맵으로 바꾼다.
             try {
                 URL url = new URL(myimgurl);
@@ -111,7 +112,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         }else if(message.length() > 100) {
 
-            Log.d(TAG, "pushtype: BigTextStyle" );
+            //Log.d(TAG, "pushtype: BigTextStyle" );
 
             notificationBuilder.setContentText("아래로 천천히 드래그 하세요.");
             //BigTextStyle
@@ -122,12 +123,12 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         }else{
 
             notificationBuilder.setContentTitle(title);
-            Log.d(TAG, "pushtype: message" );
+            //Log.d(TAG, "pushtype: message" );
             notificationBuilder.setContentText(message);
 
         }
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify((int)(System.currentTimeMillis()/1000)  /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(0  /* ID of notification */, notificationBuilder.build());
     }
 }
