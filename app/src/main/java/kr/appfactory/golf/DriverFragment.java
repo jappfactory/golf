@@ -46,7 +46,7 @@ public class DriverFragment extends Fragment implements AbsListView.OnScrollList
     Toolbar myToolbar;
 
     Activity activity;
-    String Keyword = ((MainActivity)getActivity()).getURLEncode("golf+driver+lesson");
+    String Keyword = ((MainActivity)getActivity()).getURLEncode("골프+드라이버+레슨");
     String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
 
 
