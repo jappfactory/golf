@@ -5,10 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenuView;
@@ -88,11 +90,16 @@ public class MainActivity extends AppCompatActivity  {
 
         SharedPreferences  PageToken = getSharedPreferences(nextPageToken, 0);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         // 화면을 landscape(가로) 화면으로 고정하고 싶은 경우
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT);
+
 
 
         new gms_reg().execute();
+        new versionCheck(activity).execute();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerView = (View) findViewById(R.id.nav_view);
 
@@ -709,6 +716,97 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
 }
 
 
+
+class versionCheck extends AsyncTask<Void, Void, String> {
+
+    String target ="http://www.appfactory.kr/version/version/Golf";
+
+    private  Context mContext;
+    private  String version;
+    private  String versionName;
+
+
+    public versionCheck(Context context) {
+        this.mContext = context;
+    }
+
+
+    @Override
+    protected String doInBackground(Void... voids) {
+        HttpURLConnection httpURLConnection;
+        InputStream inputStream;
+        BufferedReader bufferedReader;
+        StringBuilder stringBuilder;
+        String temp;
+        URL url;
+
+
+        PackageManager pm = mContext.getPackageManager();
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(mContext.getPackageName(), 0);
+
+            versionName = packageInfo.versionName.toString().trim();
+        } catch (Exception e) {
+
+        }
+
+        try {
+            url = new URL(target);
+
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            inputStream = httpURLConnection.getInputStream();
+
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            stringBuilder = new StringBuilder();
+            while ((temp = bufferedReader.readLine()) != null) {
+                stringBuilder.append(temp + "\n");
+            }
+
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+
+            String last_version = stringBuilder.toString().trim();
+
+
+            Log.e("version", "/"+versionName+"/");
+            Log.e("last_version", "/"+last_version+"/");
+
+
+
+            if ( !last_version.equals(versionName) ) { //false
+
+                String uri = "market://details?id=" +mContext.getPackageName();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                mContext.startActivity(intent);
+
+            }
+
+
+
+
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
+    }
+    protected void onPostExecute(String result) {
+
+
+
+    }
+
+}
 
 
 class gms_reg extends AsyncTask<Void, Void, String> {

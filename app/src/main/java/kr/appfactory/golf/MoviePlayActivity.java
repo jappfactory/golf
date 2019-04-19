@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.database.Cursor;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -27,10 +28,8 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
     public String videodesc;
     public String publishedAt;
     public String thum_pic;
-
-    public int loading = 0;
-    public int loadingresult = 0;
     public int viewcnt = 0;
+    public int loadingresult = 0;
 
     DBHelper dbHelper;
 
@@ -46,16 +45,20 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
             }
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_play);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-
         viewcnt = SharedPreference.getIntSharedPreference(getApplicationContext(), "viewcnt");
         viewcnt ++ ;
         SharedPreference.putSharedPreference(getApplicationContext(), "viewcnt", viewcnt);
+        setContentView(R.layout.activity_movie_play);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        // 화면을 landscape(가로) 화면으로 고정하고 싶은 경우
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
 
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView title = (TextView) findViewById(R.id.toolbar_title);
@@ -73,13 +76,12 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
         desc.setText(videodesc);
 
 
+
         loadingresult = viewcnt % 5;
-         if (loadingresult == 0 ) AdsFull.getInstance(getApplicationContext()).setAdsFull();
+        if (loadingresult == 0 ) AdsFull.getInstance(getApplicationContext()).setAdsFull();
 
-        //Toast.makeText (getApplicationContext(), "클릭" + viewcnt , Toast.LENGTH_LONG).show();
+        //Toast.makeText (getApplicationContext(), "클릭" + loadingresult , Toast.LENGTH_LONG).show();
         //AdsFull.getInstance(getApplicationContext()).setAdsFull();
-
-
 
         youtubeView = (YouTubePlayerView) findViewById(R.id.youtubeView);
         youtubeView.initialize(mApiKey, this);
@@ -95,7 +97,7 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
         });
 
 
-         Button favoritesButton = (Button) findViewById(R.id.favoritesButton);
+        Button favoritesButton = (Button) findViewById(R.id.favoritesButton);
         Button favoritesdelButton = (Button) findViewById(R.id.favoritesdelButton);
 
         //즐겨찾기 추가여부
@@ -138,9 +140,9 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
         shereButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String EXTRA_TEXT ="https://www.youtube.com/watch?v="+videoId;
-                 EXTRA_TEXT +="\n\n" +
-                         "언제나 즐거운 골프레슨영상 설치\n" +
-                         "https://play.google.com/store/apps/details?id=kr.appfactory.golf";
+                EXTRA_TEXT +="\n\n" +
+                        "언제나 즐거운 골프레슨영상 설치\n" +
+                        "https://play.google.com/store/apps/details?id=kr.appfactory.golf";
 
                 //Toast.makeText(getApplicationContext(), "Go Back", Toast.LENGTH_LONG).show();
                 Intent msg = new Intent (Intent.ACTION_SEND);
