@@ -156,10 +156,10 @@ public class ChannelFragment extends Fragment implements AbsListView.OnScrollLis
             // 로딩중을 알리는 프로그레스바를 보인다.
             progressBarShow();
       String nextPageToken= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
-            target = mParam1 + nextPageToken;
+            String target2 = mParam1 + nextPageToken;
 
             // 다음 데이터를 불러온다.
-            getItem(target);
+            getItem(target2);
         }
     }
 

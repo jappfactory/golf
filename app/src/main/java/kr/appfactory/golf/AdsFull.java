@@ -1,12 +1,15 @@
 package kr.appfactory.golf;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+
 
 public class AdsFull {
 
@@ -26,7 +29,7 @@ public class AdsFull {
 
         if (instance == null) {
             instance = new AdsFull(context);
-           // adFull = new InterstitialAd(context);
+            adFull = new InterstitialAd(context);
            // setAds2(this);
         }
 
@@ -63,8 +66,7 @@ public class AdsFull {
 
         //MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");//test
 
-//
-/*
+
         Log.d("adView", "" + AdRequest.DEVICE_ID_EMULATOR);
         AdView adView = (AdView) ((Activity) context).findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -72,7 +74,7 @@ public class AdsFull {
                 //.addTestDevice("B3EEABB8EE11C2BE770B684D95219ECB")
                 .build();
         adView.loadAd(adRequest);
-*/
+
     }
 
 

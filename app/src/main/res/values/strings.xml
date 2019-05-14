@@ -19,6 +19,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <!--  <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>--><!-- //test-->
+
+
     <string name="banner_ad_unit_id">ca-app-pub-6495211093988107/8845197039</string>
     <string name="banner_ad_unit_id2">ca-app-pub-6495211093988107/7532115364</string>
     <string name="ap_ad_id">ca-app-pub-6495211093988107~7266314068</string>
