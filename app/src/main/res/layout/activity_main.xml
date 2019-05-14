@@ -77,8 +77,10 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:padding="2dp"
+                android:visibility="visible"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ad_unit_id">
+                ads:adUnitId="@string/banner_ad_unit_id"
+                tools:visibility="visible">
 
             </com.google.android.gms.ads.AdView>
 
