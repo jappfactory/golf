@@ -825,17 +825,12 @@ class gms_reg extends AsyncTask<Void, Void, String> {
 
         try {
             url = new URL(target2);
-            //Log.e("주소 url 2 ", ""+url);
 
             httpURLConnection = (HttpURLConnection) url.openConnection();
             inputStream = httpURLConnection.getInputStream();
-
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
             stringBuilder = new StringBuilder();
-            //Log.e("stringBuilder : ", ""+stringBuilder);
             while ((temp = bufferedReader.readLine()) != null) {
-                //Log.e("temp", ""+temp);
                 stringBuilder.append(temp + "\n");
             }
 
