@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.util.List;
 
 public class SearchFragment extends Fragment implements AbsListView.OnScrollListener {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private boolean lastItemVisibleFlag = false;    // 리스트 스크롤이 마지막 셀(맨 바닥)로 이동했는지 체크할 변수
     public  ListView driverMovieListView;
     public List<DriverMovie> driverMovieList;
@@ -43,7 +45,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
     private String mParam1;
     private String Keyword;
     Activity activity;
-    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
+    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&safeSearch=strict&type=video";
 
     private OnFragmentInteractionListener mListener;
 
@@ -114,8 +116,12 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
         // 다음 데이터를 불러온다.
 
         Keyword = ((MainActivity)getActivity()).getURLEncode(""+mParam1);
-        target = target + Keyword +"&pageToken=";
 
+        target = target + "&key="+getResources().getString(R.string.gcp_api_key);
+
+        target = target + "&q="+Keyword +"&pageToken=";
+
+        Log.e("target", ""+target);
         getItem(target);
     }
 
@@ -162,10 +168,15 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
 
 
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=5&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q=";
+            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=5&safeSearch=strict&type=video";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
-            target = target + Keyword +"&pageToken="+ aa;
+
+            target = target + "&key="+getResources().getString(R.string.gcp_api_key);
+            target = target + "&q="+Keyword +"&pageToken="+ aa;
+
+            Log.e("target", ""+target);
+
             // 다음 데이터를 불러온다.
             getItem(target);
         }
