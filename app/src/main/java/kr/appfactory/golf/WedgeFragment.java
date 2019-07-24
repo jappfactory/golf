@@ -152,7 +152,6 @@ public class WedgeFragment extends Fragment implements AbsListView.OnScrollListe
             //progressBar.setVisibility(View.VISIBLE);
             progressBarShow();
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=5&safeSearch=strict&type=video";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
             target = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword +"&pageToken="+ aa;

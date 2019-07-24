@@ -117,9 +117,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
 
         Keyword = ((MainActivity)getActivity()).getURLEncode(""+mParam1);
 
-        target = target + "&key="+getResources().getString(R.string.gcp_api_key);
-
-        target = target + "&q="+Keyword +"&pageToken=";
+        target = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword +"&pageToken=";
 
         Log.e("target", ""+target);
         getItem(target);
@@ -172,8 +170,7 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
 
-            target = target + "&key="+getResources().getString(R.string.gcp_api_key);
-            target = target + "&q="+Keyword +"&pageToken="+ aa;
+            target = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword +"&pageToken="+ aa;
 
             Log.e("target", ""+target);
 

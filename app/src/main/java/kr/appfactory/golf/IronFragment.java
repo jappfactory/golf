@@ -154,11 +154,10 @@ public class IronFragment extends Fragment implements AbsListView.OnScrollListen
             // 로딩중을 알리는 프로그레스바를 보인다.
             progressBarShow();
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&safeSearch=strict&type=video";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
-            target = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword +"&pageToken="+ aa;
 
+            target = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword +"&pageToken="+ aa;
             // 다음 데이터를 불러온다.
             getItem(target);
         }
