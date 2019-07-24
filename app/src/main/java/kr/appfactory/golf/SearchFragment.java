@@ -114,13 +114,12 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
 
         driverMovieListView.setOnScrollListener(this);
         // 다음 데이터를 불러온다.
+ ;
 
         Keyword = ((MainActivity)getActivity()).getURLEncode(""+mParam1);
+        String target2 = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword +"&pageToken=";
 
-        target = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword +"&pageToken=";
-
-        Log.e("target", ""+target);
-        getItem(target);
+        getItem(target2);
     }
 
     public void progressBarShow(){
@@ -166,7 +165,6 @@ public class SearchFragment extends Fragment implements AbsListView.OnScrollList
 
 
 
-            String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=5&safeSearch=strict&type=video";
             String aa= SharedPreference.getSharedPreference(getActivity(), "nextPageToken");
 
 

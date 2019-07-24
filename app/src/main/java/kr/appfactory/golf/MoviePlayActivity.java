@@ -19,7 +19,6 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
-    String mApiKey = "AIzaSyBepkrOwooKDltImT5MhFKlW7QcnPm_hNE";
     YouTubePlayerView youtubeView;
     YouTubePlayer mPlayer;
     Toolbar myToolbar;
@@ -84,7 +83,7 @@ public class MoviePlayActivity extends YouTubeBaseActivity implements YouTubePla
         //AdsFull.getInstance(getApplicationContext()).setAdsFull();
 
         youtubeView = (YouTubePlayerView) findViewById(R.id.youtubeView);
-        youtubeView.initialize(mApiKey, this);
+        youtubeView.initialize(getResources().getString(R.string.mapi_key), this);
 
         //youtubeView.initialize("AIzaSyCBOFrruYNwGIjpNZ9mEHUDyJg3qE3gwco", listener);
 
