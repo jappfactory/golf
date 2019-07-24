@@ -47,7 +47,7 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
     Activity activity;
 
     String Keyword = ((MainActivity)getActivity()).getURLEncode("골프+퍼터+레슨");
-    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&key=AIzaSyBn4fOG4zKOYVbYtcMtGj8gGsVVpTYb68g&safeSearch=strict&type=video&q="+Keyword+"&pageToken=";
+    String target = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=date&videoSyndicated=true&maxResults=10&safeSearch=strict&type=video";
 
     private OnFragmentInteractionListener mListener;
 
@@ -109,6 +109,7 @@ public class PutterFragment extends Fragment implements AbsListView.OnScrollList
 
         driverMovieListView.setOnScrollListener(this);
         // 다음 데이터를 불러온다.
+        target = target + "&key="+getResources().getString(R.string.gcp_api_key)+ "&q="+Keyword;
         getItem(target);
     }
 
