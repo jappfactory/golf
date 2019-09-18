@@ -52,6 +52,9 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**dc dddd
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -219,8 +222,6 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public void onBackPressed() {
 
-        AdsFull.getInstance(getApplicationContext()).setAdsFull();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
 
         builder.setIcon(R.drawable.billiard_icon);
@@ -230,7 +231,17 @@ public class MainActivity extends AppCompatActivity  {
         {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+
+                AdsFull.getInstance(getApplicationContext()).setAdsFull();
+                Timer timer = new Timer();
+                timer.schedule( new TimerTask()
+                                {
+                                    public void run()
+                                    {
+                                        finish();
+                                    }
+                                }
+                        , 1000);
             }
 
         });
