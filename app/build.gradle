@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "kr.appfactory.golf"
         minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 8
-        versionName "1.0.8"
+        targetSdkVersion 28
+        versionCode 11
+        versionName "2.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
