@@ -377,11 +377,10 @@ public class MainActivity extends AppCompatActivity  {
                 //Toast.makeText (activity, "클릭3" + mnuListView  , Toast.LENGTH_LONG).show();
                 mnuListView2.setAdapter(menuItemAdapter2);
 
-
+//수정
                 mnuListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
