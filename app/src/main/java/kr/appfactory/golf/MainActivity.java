@@ -340,30 +340,30 @@ public class MainActivity extends AppCompatActivity  {
                 // 데이터 원본 준비
                 itemList2 = new ArrayList<MenuItema>();
 
-                itemList2.add(new MenuItema("명품스윙 에이미 조 골프 레슨", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PUKby5Cq9jArperhkdbX1X6g&maxResults=10"));
-                itemList2.add(new MenuItema("왕초보 골프입문 시리즈 - 심짱", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLCW1r5BxeqUXcarRbwfJuxEN94fS7XQb8&maxResults=10"));
-                itemList2.add(new MenuItema("독학골퍼를 위한 셀프골프레슨 - 심짱", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLCW1r5BxeqUXIYGmydOpcrt3HxiEugQpP&maxResults=10"));
-                itemList2.add(new MenuItema("계속보면 좋은 골프기초 - 심짱", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLCW1r5BxeqUWtGBztPJqu088ygieNfyQV&maxResults=10"));
-                itemList2.add(new MenuItema("박대성프로의 1분레슨", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLUT6r8FkJUXgS5hOfQBiM5OPt2zWiXKdK&maxResults=10"));
-                itemList2.add(new MenuItema("굿샷김프로 - 동영상 골프레슨", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLatlCU2UD5ayXEonr7kzJjAhuh_e807AM&maxResults=10"));
-                itemList2.add(new MenuItema("정프로의 클라쓰 몰아보기!", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLJjPXwl6J0C8Djy7W-4osYWsL6bJdU_hO&maxResults=10"));
-                itemList2.add(new MenuItema("상위1%골프 레슨", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLTKm3iaNcU4JHavt0JzjiD62DO46CqjKf&maxResults=10"));
-                itemList2.add(new MenuItema("중급 싱글되기 골프레슨 ~ ^^", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL4OYEpDO4EFttKj5gBtE9lmlBHOgadIW9&maxResults=10"));
-                itemList2.add(new MenuItema("비거리는 곧 자신감 장타레슨", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLBRks3VEudicyy188_sKojJm0G7DuebDF&maxResults=10"));
-                itemList2.add(new MenuItema("스코어의 꽃 숏게임", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLBRks3VEudie9OjfJMgepjJx4YXSwuZSB&maxResults=10"));
-                itemList2.add(new MenuItema("잘 배운 버릇 평생가는 골프기본기", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLBRks3VEudif6y3TYCqpiJOv2u0sdeC_4&maxResults=10"));
-                itemList2.add(new MenuItema("초보 골프 입문 골퍼분들께 ~ ^^", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL4OYEpDO4EFu4wPcPtZP_ptWC5luU9LO6&maxResults=10"));
-                itemList2.add(new MenuItema("[초보레슨]윤소원의 비기너스 골프", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjXreuI8oh52DesY3CJCJ1Ya&maxResults=10"));
-                itemList2.add(new MenuItema("[레슨]박교희의 쉬운골프", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjWKyfVHpswFXvxRCij2VBQq&maxResults=10"));
-                itemList2.add(new MenuItema("[레슨]이동익의 홈메이드 골프", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjX5jn8zDZJ1GrjwF05InL2G&maxResults=10"));
-                itemList2.add(new MenuItema("[레슨]임진한의 스페셜레슨", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLsoAKjawncjVbOlr72df-mVl1WIKMtEBt&maxResults=10"));
-                itemList2.add(new MenuItema("PGA Class A 함순웅의 골프채널", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=UUluR-EQnCekFsG0IJwM2Ihg&maxResults="));
-                itemList2.add(new MenuItema("이근화프로 (Monit Golf)", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8Tiep6g2ub79ksKBhd_Ng_q9&maxResults=10"));
-                itemList2.add(new MenuItema("문성모프로 (Monit Golf)", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8Tg_iXxRyJVqFUUvuZwRKw81&maxResults=10"));
-                itemList2.add(new MenuItema("전수빈프로 (Monit Golf)", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TgWl3dupeExzdIS2KwdETMU&maxResults=10"));
-                itemList2.add(new MenuItema("이효주프로 (Monit Golf)", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TgymOrkKPxCDuXakkFp2SIj&maxResults=10"));
-                itemList2.add(new MenuItema("김종석프로 (Monit Golf)", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TgllZn3IIma6wanpfSCAEdZ&maxResults=10"));
-                itemList2.add(new MenuItema("정효민프로 (Monit Golf)", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLNqL0LyfO8TjLFkVBX4a4Ook7HH7yIO2m&maxResults=10"));
+                itemList2.add(new MenuItema("명품스윙 에이미 조 골프 레슨", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=1"));
+                itemList2.add(new MenuItema("왕초보 골프입문 시리즈 - 심짱", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=2"));
+                itemList2.add(new MenuItema("독학골퍼를 위한 셀프골프레슨 - 심짱", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=3"));
+                itemList2.add(new MenuItema("계속보면 좋은 골프기초 - 심짱", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=4"));
+                itemList2.add(new MenuItema("박대성프로의 1분레슨", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=5"));
+                itemList2.add(new MenuItema("굿샷김프로 - 동영상 골프레슨", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=6"));
+                itemList2.add(new MenuItema("정프로의 클라쓰 몰아보기!", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=7"));
+                itemList2.add(new MenuItema("상위1%골프 레슨", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=8"));
+                itemList2.add(new MenuItema("중급 싱글되기 골프레슨 ~ ^^", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=9"));
+                itemList2.add(new MenuItema("비거리는 곧 자신감 장타레슨", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=10"));
+                itemList2.add(new MenuItema("스코어의 꽃 숏게임", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=11"));
+                itemList2.add(new MenuItema("잘 배운 버릇 평생가는 골프기본기", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=12"));
+                itemList2.add(new MenuItema("초보 골프 입문 골퍼분들께 ~ ^^", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=13"));
+                itemList2.add(new MenuItema("[초보레슨]윤소원의 비기너스 골프", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=14"));
+                itemList2.add(new MenuItema("[레슨]박교희의 쉬운골프", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=15"));
+                itemList2.add(new MenuItema("[레슨]이동익의 홈메이드 골프", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=16"));
+                itemList2.add(new MenuItema("[레슨]임진한의 스페셜레슨", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=17"));
+                itemList2.add(new MenuItema("PGA Class A 함순웅의 골프채널", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=18"));
+                itemList2.add(new MenuItema("이근화프로 (Monit Golf)", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=19"));
+                itemList2.add(new MenuItema("문성모프로 (Monit Golf)", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=20"));
+                itemList2.add(new MenuItema("전수빈프로 (Monit Golf)", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=21"));
+                itemList2.add(new MenuItema("이효주프로 (Monit Golf)", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=22"));
+                itemList2.add(new MenuItema("김종석프로 (Monit Golf)", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=23"));
+                itemList2.add(new MenuItema("정효민프로 (Monit Golf)", "http://appfactory.kr/MovieSearch/getGolofChannelMovie?ch_id=24"));
 
 
                 //  menuItemAdapter = new MenuItemAdapter(context,  itemList, this);
@@ -602,7 +602,7 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
             JSONObject jsonObject = new JSONObject(result);
             JSONArray jsonArray = jsonObject.getJSONArray("items");
 
-            String totalResults = jsonObject.getJSONObject("pageInfo").getString("totalResults");
+            String  totalResults = jsonObject.getJSONObject("pageInfo").getString("totalResults");
 
             try {
                 nextPageToken = jsonObject.getString("nextPageToken");
@@ -631,6 +631,8 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
                 JSONObject object = jsonArray.getJSONObject(count);
 
 
+                //Log.e("kind", ""+jsonObject.getString("kind"));
+               // Toast.makeText (mContext, "클릭" + nextPageToken, Toast.LENGTH_SHORT).show();
 
 
                 if(jsonObject.getString("kind").equals("youtube#playlistItemListResponse")){
@@ -665,10 +667,6 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
 
                 }else if(jsonObject.getString("kind").equals("youtube#searchListResponse")){
 
-                    //Toast.makeText (mContext, "클릭" + jsonObject.getString("kind"), Toast.LENGTH_SHORT).show();
-
-                    //   Toast.makeText (mContext, "클릭" + object.getJSONObject("id").getString("videoId") , Toast.LENGTH_SHORT).show();
-
 
                     videoId = object.getJSONObject("id").getString("videoId");
                     subjectText = object.getJSONObject("snippet").getString("title");
@@ -678,6 +676,19 @@ class LoadMovieTask extends AsyncTask<Void, Void, String> {
                     thum_pic = object.getJSONObject("snippet")
                             .getJSONObject("thumbnails").getJSONObject("medium")
                             .getString("url"); // 썸내일 이미지 URL값
+
+
+                    viewCnt = "0";
+                    DriverMovie drivermovie = new DriverMovie(thum_pic, subjectText, viewDate, viewCnt, videoId , descriptionText);
+                    driverMovieList.add(drivermovie);
+                }else if(jsonObject.getString("kind").equals("searchListResponse")){
+
+                    videoId = object.getString("videoId");
+                    subjectText = object.getString("title");
+                    descriptionText = object.getString("description");
+                    viewDate = object.getString("publishedAt")
+                            .substring(0, 10);
+                    thum_pic = object.getString("thumbnails"); // 썸내일 이미지 URL값
 
                     viewCnt = "0";
                     DriverMovie drivermovie = new DriverMovie(thum_pic, subjectText, viewDate, viewCnt, videoId , descriptionText);
