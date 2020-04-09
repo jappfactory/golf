@@ -451,23 +451,32 @@ public class MainActivity extends AppCompatActivity  {
         //mWebView.loadUrl("javascript:alert('"+networkmsg+"')");
 
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
 
-        new AlertDialog.Builder(this, R.style.MyAlertDialogStyle)
-                .setIcon(R.drawable.billiard_icon)
-                .setTitle(R.string.app_name)
-                .setMessage(""+networkmsg+"")
-                .setNegativeButton(R.string.exitmsgN, null)
-                .setPositiveButton(R.string.exitmsgY,new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog,int whichButton)
-                    {
-                        finish();
-                        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
-                    }
-                }).show();
+        builder.setIcon(R.drawable.billiard_icon);
+        builder.setTitle(R.string.app_name);
+        builder.setMessage(R.string.exitmsg);
+        builder.setPositiveButton(R.string.exitmsgY, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+                AdsFull.getInstance(getApplicationContext()).setAdsFull();
+                Timer timer = new Timer();
+                timer.schedule( new TimerTask()
+                                {
+                                    public void run()
+                                    {
+                                        finish();
+                                    }
+                                }
+                        , 1000);
 
-        //startActivity(new Intent(getApplicationContext(), OfflineActivity.class));
+            }
+
+        });
+        builder.setNegativeButton(R.string.exitmsgN, null);
+        AlertDialog dialog = builder.show();
 
 
     }
